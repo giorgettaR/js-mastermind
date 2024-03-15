@@ -22,7 +22,7 @@ guessSendEl.addEventListener('click', function(){
         
         console.log('result ' + arrayResult)
     } else {
-        console.log('insert 4 numbers between 1 and 9')
+        console.log('insert 4 numbers between 1 and 9 (no blanks)')
     }
 })
 
@@ -41,13 +41,20 @@ function getPcArray(min, max, length){
 function getResultString(pc, user){
     let arrayString = '';
     for (i = 0; i < 4; i++){
-        if (pc.includes(user[i])){
-            if (pc[i] === user[i]){
+        // if (pc.includes(user[i])){
+        //     if (pc[i] === user[i]){
+        //         arrayString += 'X';
+        //     } else {
+        //         arrayString += 'O';
+        //     }
+        // }
+        if (pc.indexOf(user[1]) != (-1)) {
+            if (pc[i] === user[i]) {
                 arrayString += 'X';
             } else {
-                arrayString += 'O';
+                arrayString += 'O'
             }
-        }
+        } 
     }
     return arrayString
 }
