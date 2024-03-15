@@ -1,6 +1,7 @@
 
 let guessSendEl = document.getElementById('indovina');
-let guessEl = document.getElementById('numero')
+let guessEl = document.getElementById('numero');
+resultDiv = document.querySelector('.result');
 
 const array = getPcArray(1, 9, 4);
 console.log('pc ' + array);
@@ -18,9 +19,17 @@ guessSendEl.addEventListener('click', function(){
         }
         console.log('user ' + guessArrayInt)
 
-        let arrayResult = getResultString(array, guessArrayInt);
-        
-        console.log('result ' + arrayResult)
+        let resultString = getResultString(array, guessArrayInt);
+        console.log('result ' + resultString)
+
+        const resultBox = document.createElement('div');
+        resultBox.classList.add('resultBox');
+        resultBox.innerHTML = resultString;
+        if (resultString == 'XXXX') {
+            resultBox.innerHTML = 'YOU WIN';
+        }
+        resultDiv.append(resultBox);
+
     } else {
         console.log('insert 4 numbers between 1 and 9 (no blanks)')
     }
@@ -39,7 +48,7 @@ function getPcArray(min, max, length){
 }
 
 function getResultString(pc, user){
-    let arrayString = '';
+    let resultString = '';
     for (i = 0; i < 4; i++){
         // if (pc.includes(user[i])){
         //     if (pc[i] === user[i]){
@@ -50,11 +59,11 @@ function getResultString(pc, user){
         // }
         if (pc.indexOf(user[1]) != (-1)) {
             if (pc[i] === user[i]) {
-                arrayString += 'X';
+                resultString += 'X';
             } else {
-                arrayString += 'O'
+                resultString += 'O'
             }
         } 
     }
-    return arrayString
+    return resultString
 }
