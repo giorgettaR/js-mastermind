@@ -17,21 +17,12 @@ guessSendEl.addEventListener('click', function(){
         for (i = 0; i < 4; i++) {
             guessArrayInt.push(parseInt(guessArray[i]))
         }
-        console.log('user ' + guessArrayInt)
 
         let resultString = getResultString(array, guessArrayInt);
-        console.log('result ' + resultString)
-
-        const resultBox = document.createElement('div');
-        resultBox.classList.add('resultBox');
-        resultBox.innerHTML = resultString;
-        if (resultString == 'XXXX') {
-            resultBox.innerHTML = 'YOU WIN';
-        }
-        resultDiv.append(resultBox);
+        createResultMessagge(resultString);
 
     } else {
-        console.log('insert 4 numbers between 1 and 9 (no blanks)')
+        alert('insert 4 numbers between 1 and 9 (no blanks)')
     }
 })
 
@@ -66,4 +57,20 @@ function getResultString(pc, user){
         } 
     }
     return resultString
+}
+
+function createResultMessagge(resultString) {
+    const resultBox = document.createElement('div');
+        resultBox.classList.add('resultBox', 'p-2', 'm-2', 'text-center', 'w-50');
+        if (resultString == '') {
+            resultBox.innerHTML = 'no matches'
+            resultBox.classList.add('border', 'border-danger')
+        } else if (resultString == 'XXXX') {
+            resultBox.innerHTML = 'YOU WIN';
+            resultBox.classList.add('fw-bold', 'border', 'border-success')
+        } else {
+            resultBox.innerHTML = resultString;
+            resultBox.classList.add('border', 'border-info')
+        }
+        resultDiv.append(resultBox);
 }
